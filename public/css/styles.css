@@ -16,7 +16,7 @@ body {
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   UNIFIED SECURITY / AUTH LAYOUTS
+   AUTH
    ========================================================================== */
 .unified-auth-container {
     display: flex;
@@ -35,35 +35,22 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
-.auth-box h2 {
-    color: #0572ce;
-    margin-bottom: 8px;
-}
+.auth-box h2 { color: #0572ce; margin-bottom: 8px; }
+.auth-box p { font-size: 14px; color: #777; margin-bottom: 24px; }
 
-.auth-box p {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 24px;
-}
-
-.input-group {
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #312d2a;
-}
-
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #312d2a; }
 .input-group input {
     width: 100%;
     padding: 12px;
     border: 1px solid #a1a09f;
     border-radius: 4px;
     font-size: 15px;
+}
+.input-group input:focus {
+    outline: none;
+    border-color: #0572ce;
+    box-shadow: 0 0 0 3px rgba(5,114,206,.12);
 }
 
 .btn-primary {
@@ -78,13 +65,14 @@ body {
     cursor: pointer;
     transition: background 0.2s;
 }
+.btn-primary:hover:not(:disabled) { background-color: #578a35; }
+.btn-primary:disabled { opacity: .6; cursor: not-allowed; }
 
-.btn-primary:hover { background-color: #578a35; }
 .auth-footer { margin-top: 20px; text-align: center; }
 .auth-footer a { font-size: 14px; color: #0572ce; text-decoration: none; }
 
 /* ==========================================================================
-   ADMIN MAIN WEB CORE DASHBOARD
+   ADMIN DASHBOARD
    ========================================================================== */
 .main-header {
     display: flex;
@@ -93,7 +81,11 @@ body {
     background-color: #34302e;
     color: #ffffff;
     padding: 15px 30px;
+    gap: 16px;
 }
+
+.header-brand h1 { font-size: 20px; }
+.header-nav { display: flex; align-items: center; gap: 4px; }
 
 .nav-link {
     background: none;
@@ -102,12 +94,11 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     font-size: 15px;
+    border-bottom: 3px solid transparent;
+    transition: color .15s;
 }
-
-.nav-link.active {
-    color: #ffffff;
-    border-bottom: 3px solid #0572ce;
-}
+.nav-link.active { color: #ffffff; border-bottom-color: #0572ce; }
+.nav-link:hover { color: #e0e0e0; }
 
 .btn-logout {
     background-color: transparent;
@@ -116,10 +107,22 @@ body {
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    margin-left: 8px;
+}
+.btn-logout:hover { background: rgba(255,255,255,.1); }
+
+.badge-role {
+    font-size: 12px;
+    color: #4ade80;
+    background: rgba(74,222,128,.12);
+    border: 1px solid rgba(74,222,128,.25);
+    padding: 3px 10px;
+    border-radius: 20px;
 }
 
 /* ==========================================================================
-   TIMELINE CONTÍNUA DE 24 HORAS VISUAL GRID
+   TIMELINE 24H
    ========================================================================== */
 .timeline-container {
     margin: 20px;
@@ -133,78 +136,158 @@ body {
     display: flex;
     background-color: #312d2a;
     color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .timeline-label-col {
     min-width: 220px;
     max-width: 220px;
-    padding: 15px;
+    padding: 12px 15px;
     background-color: #252220;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+}
+
+.timeline-label-col strong { font-size: 13px; color: #fff; }
+
+/* [CORRIGIDO] Classe area-tag estava faltando */
+.area-tag {
+    font-size: 11px;
+    color: #9ca3af;
+    background: rgba(255,255,255,.08);
+    padding: 1px 6px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 2px;
+    width: fit-content;
 }
 
 .timeline-hour-slot {
     width: 100px;
     text-align: center;
-    padding: 15px 0;
+    padding: 12px 0;
     border-right: 1px solid #4a4440;
     flex-shrink: 0;
-    font-size: 13px;
+    font-size: 12px;
+    color: #d1d5db;
 }
 
 .timeline-row {
     display: flex;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #f0f0f0;
     align-items: center;
+    min-height: 70px;
 }
+
+.timeline-row:hover { background: #fafafa; }
 
 .timeline-drag-zone {
     display: flex;
     align-items: center;
     width: calc(100px * 24);
-    height: 70px;
-    background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px);
-    background-size: 100px 100px;
+    min-height: 70px;
+    background-image: linear-gradient(to right, #e8e8e8 1px, transparent 1px);
+    background-size: 100px 100%;
     position: relative;
-    padding: 0 5px;
+    padding: 4px 5px;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.timeline-drag-zone.drag-over {
+    background-color: #eff6ff;
 }
 
 /* ==========================================================================
-   MOBILE INTERFACE (TECNICO ECOSYSTEM)
+   MOBILE — TÉCNICO
    ========================================================================== */
 .mobile-body { background-color: #f0f2f5; }
-.mobile-container { max-width: 480px; margin: 0 auto; min-height: 100vh; background: #ffffff; display: flex; flex-direction: column; }
-.mobile-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: #34302e; color: #ffffff; }
+
+.mobile-container {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #34302e;
+    color: #ffffff;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.tec-info h3 { font-size: 15px; }
+.tec-info small { font-size: 11px; color: #9ca3af; }
+
+.mobile-main {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 24px;
+}
 
 .tec-actions-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 15px;
+    gap: 10px;
 }
 
 .btn-action {
-    padding: 15px 10px;
-    font-size: 14px;
+    padding: 14px 10px;
+    font-size: 13px;
     font-weight: bold;
-    border-radius: 6px;
-    border: 1px solid #a1a09f;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
     background: #ffffff;
     cursor: pointer;
     text-align: center;
+    transition: opacity .15s, transform .1s;
+    line-height: 1.4;
+}
+.btn-action:active:not(:disabled) { transform: scale(.97); }
+.btn-action:disabled {
+    background-color: #f5f5f5 !important;
+    color: #b5b5b5 !important;
+    border-color: #e5e7eb !important;
+    cursor: not-allowed;
 }
 
-.btn-action:disabled { background-color: #f5f5f5 !important; color: #b5b5b5 !important; cursor: not-allowed; }
-.btn-geo { background-color: #e3f2fd; color: #0572ce; border-color: #0572ce; }
+.btn-geo   { background-color: #e3f2fd; color: #0572ce; border-color: #0572ce; }
 .btn-start { background-color: #e8f5e9; color: #6ba741; border-color: #6ba741; }
 .btn-alert { background-color: #fff3e0; color: #ef6c00; border-color: #ef6c00; }
-.btn-finish { background-color: #6ba741; color: white; grid-column: span 2; }
+.btn-finish { background-color: #6ba741; color: white; border-color: #6ba741; grid-column: span 2; }
 
-/* TOGGLE SWITCH ROTA SMARTPHONE */
-.switch { position: relative; display: inline-block; width: 46px; height: 24px; }
-.switch input { display:none; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; }
-.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; }
+/* TOGGLE SWITCH */
+.switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
+.switch input { display: none; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .3s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .3s;
+}
 input:checked + .slider { background-color: #0572ce; }
 input:checked + .slider:before { transform: translateX(22px); }
 .slider.round { border-radius: 24px; }

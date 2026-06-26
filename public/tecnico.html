@@ -3,49 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SRS_SWT - Técnico Mobile</title>
+    <title>SRS_SWT - Técnico</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Firebase v8 CDN — storage incluído aqui também -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script><!-- [CORRIGIDO] -->
 </head>
 <body class="mobile-body">
 
-    <div id="tecnico-dashboard" class="app-screen mobile-container">
-        <header class="mobile-header">
-            <div class="tec-info">
-                <h3 id="tec-name-display">Carregando...</h3>
-                <small>Operação de Campo</small>
+<div id="tecnico-login" class="app-screen unified-auth-container">
+    <div class="auth-box">
+        <h2>SRS_SWT</h2>
+        <p>Acesso Técnico de Campo</p>
+        <form onsubmit="event.preventDefault(); handleLogin(
+            document.getElementById('tec-login-id').value,
+            document.getElementById('tec-login-pw').value
+        )">
+            <div class="input-group">
+                <label>RE</label>
+                <input type="text" id="tec-login-id" required placeholder="Ex: 35188" inputmode="numeric">
             </div>
-            <div class="route-control">
-                <span>Rota:</span>
-                <label class="switch">
-                    <input type="checkbox" id="technical-route-toggle" onchange="handleTechnicalRouteSwitch(this.checked)">
-                    <span class="slider round"></span>
-                </label>
+            <div class="input-group">
+                <label>Senha</label>
+                <input type="password" id="tec-login-pw" required placeholder="••••••••">
             </div>
-        </header>
-
-        <main class="mobile-main" id="tecnico-services-container">
-            <div class="tec-service-card active-route">
-                <div class="card-ticket-header">
-                    <h4>Ticket Sigtim: 6779214</h4>
-                    <span class="status-badge s-pendente">Pendente</span>
-                </div>
-
-                <div class="tec-actions-grid">
-                    <button class="btn-action" onclick="alert('Exibir Carimbo Sigtim')">📋 Dados do Serviço</button>
-                    <button class="btn-action btn-geo" onclick="/* Mudar status para Em Rota */">🚚 Dar Deslocamento</button>
-                    <button class="btn-action btn-start" onclick="/* Trigger câmera + Iniciar */">⚡ Iniciar Serviço</button>
-                    <button class="btn-action" onclick="/* Input de atualização instantânea */">💬 Enviar Atualização</button>
-                    <button class="btn-action btn-alert" onclick="/* Alerta popup/som no admin */">⚠️ Solicitar Teste</button>
-                    <button class="btn-action" onclick="/* Form Baixa + Fotos */">📥 Adicionar Baixa</button>
-                    <button class="btn-action btn-finish" id="btn-finalizar-ticket" disabled>🏁 Finalizar</button>
-                </div>
-            </div>
-        </main>
+            <p id="login-error" style="color:#dc2626;font-size:13px;margin:-10px 0 12px;min-height:18px"></p>
+            <button type="submit" id="btn-login" class="btn-primary">Entrar</button>
+        </form>
     </div>
+</div>
 
-    <script src="js/app.js"></script>
+<!-- tela do técnico — renderizada dinamicamente pelo app.js -->
+<div id="tecnico-dashboard" class="app-screen mobile-container hidden">
+    <header class="mobile-header">
+        <div class="tec-info">
+            <h3 id="tec-name-display">Carregando...</h3>
+            <small>Operação de Campo</small>
+        </div>
+        <div class="route-control" style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:12px">Rota</span>
+            <label class="switch">
+                <input type="checkbox" id="technical-route-toggle"
+                       onchange="handleTechnicalRouteSwitch(this.checked)">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <button onclick="auth.signOut()" class="btn-logout" style="font-size:12px;padding:4px 8px">Sair</button>
+    </header>
+
+    <!-- Cards de serviço gerados pelo renderTecnicoActionInterface() -->
+    <main class="mobile-main" id="tecnico-services-container">
+        <div style="text-align:center;padding:40px;color:#888">
+            <div style="font-size:48px">⏳</div>
+            <p style="margin-top:12px">Aguardando serviços...</p>
+        </div>
+    </main>
+</div>
+
+<script src="js/app.js"></script>
+
+<script>
+// Redireciona login-screen → tecnico-login nesta página
+auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+        showScreen('tecnico-login');
+    }
+    // Se autenticado, onAuthStateChanged em app.js já cuida do redirecionamento
+});
+</script>
+
 </body>
 </html>
