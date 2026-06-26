@@ -2,12 +2,12 @@
 // CONFIGURAÇÃO E INICIALIZAÇÃO DO ECOSSISTEMA FIREBASE
 // ==========================================================================
 const firebaseConfig = {
-    apiKey: "AIzaSyD2jO72oONY398UqG1x300p-AaEE2RTDZw",
-    authDomain: "srs-swt.firebaseapp.com",
-    projectId: "srs-swt",
-    storageBucket: "srs-swt.firebasestorage.app",
-    messagingSenderId: "2901732246",
-    appId: "1:2901732246:web:da1abc0e90ffe7fd5fd4e5"
+    apiKey: "AIzaSyD2jO72oONY398UqGlx3OOp-AaEE2RTDZw",
+  authDomain: "srs-swt.firebaseapp.com",
+  projectId: "srs-swt",
+  storageBucket: "srs-swt.firebasestorage.app",
+  messagingSenderId: "29017322496",
+  appId: "1:29017322496:web:da1abc0e90ffe7fd5fd4e5"
 };
 
 const app = firebase.initializeApp(firebaseConfig);
