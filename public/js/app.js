@@ -3,11 +3,12 @@
 // ==========================================================================
 const firebaseConfig = {
     apiKey: "AIzaSyD2jO72oONY398UqGlx3OOp-AaEE2RTDZw",
-  authDomain: "srs-swt.firebaseapp.com",
-  projectId: "srs-swt",
-  storageBucket: "srs-swt.firebasestorage.app",
-  messagingSenderId: "29017322496",
-  appId: "1:29017322496:web:da1abc0e90ffe7fd5fd4e5"
+    authDomain: "srs-swt.firebaseapp.com",
+    projectId: "srs-swt",
+    storageBucket: "srs-swt.firebasestorage.app",
+    messagingSenderId: "29017322496",
+    appId: "1:29017322496:web:da1abc0e90ffe7fd5fd4e5",
+    measurementId: "G-M6EM2BMPND"
 };
 
 const app = firebase.initializeApp(firebaseConfig);
@@ -148,22 +149,24 @@ auth.onAuthStateChanged(async (user) => {
         }
     } else {
         currentUserData = null;
-        showScreen("login-screen");
+        // Redireciona para a tela correta de login conforme a página atual
+        const naTecnico = window.location.pathname.includes("tecnico");
+        showScreen(naTecnico ? "tecnico-login" : "login-screen");
     }
 });
 
 function applySecurityMatrix(role) {
+    const naTecnico = window.location.pathname.includes("tecnico");
+
     if (["admin", "supervisor", "mesaria"].includes(role)) {
+        if (naTecnico) { window.location.href = "index.html"; return; }
         showScreen("admin-dashboard");
         initAdminView();
+
     } else if (role === "tecnico") {
-        // tecnico.html é uma página separada
-        if (!document.getElementById("tecnico-dashboard")) {
-            window.location.href = "tecnico.html";
-        } else {
-            showScreen("tecnico-dashboard");
-            initTecnicoView();
-        }
+        if (!naTecnico) { window.location.href = "tecnico.html"; return; }
+        showScreen("tecnico-dashboard");
+        initTecnicoView();
     }
 }
 
