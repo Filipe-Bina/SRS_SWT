@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRS_SWT - Painel Administrativo</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+</head>
+<body>
+
+    <div id="login-screen" class="app-screen unified-auth-container">
+        <div class="auth-box">
+            <h2>SRS_SWT</h2>
+            <p>Conecte-se ao ecossistema de despacho</p>
+            <form id="login-form" onsubmit="event.preventDefault(); /* Integrar auth aqui */">
+                <div class="input-group">
+                    <label>E-mail ou RE</label>
+                    <input type="text" id="login-identifier" required placeholder="Digite seu acesso">
+                </div>
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Entrar no Sistema</button>
+            </form>
+            <div class="auth-footer">
+                <a href="#" onclick="showScreen('first-access-screen')">Primeiro Acesso? Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="first-access-screen" class="app-screen unified-auth-container hidden">
+        <div class="auth-box">
+            <h2>Primeiro Acesso</h2>
+            <p>Valide sua credencial na Whitelist corporativa</p>
+            <form id="first-access-form" onsubmit="event.preventDefault(); handleFirstAccess(document.getElementById('fa-identifier').value, document.getElementById('fa-password').value);">
+                <div class="input-group">
+                    <label>RE ou E-mail Cadastrado</label>
+                    <input type="text" id="fa-identifier" required placeholder="Ex: 35188">
+                </div>
+                <div class="input-group">
+                    <label>Nova Senha (Mínimo 8 caracteres)</label>
+                    <input type="password" id="fa-password" required placeholder="Senha alfanumérica">
+                </div>
+                <button type="submit" class="btn-primary">Ativar Minha Conta</button>
+            </form>
+            <div class="auth-footer">
+                <a href="#" onclick="showScreen('login-screen')">Voltar para o Login</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-dashboard" class="app-screen hidden">
+        <header class="main-header">
+            <div class="header-brand">
+                <h1>SRS_SWT</h1>
+                <span class="badge-role" id="user-role-badge">Mesária / Gestão</span>
+            </div>
+            <nav class="header-nav">
+                <button class="nav-link active" onclick="switchTab('timeline-tab')">Linha do Tempo (24h)</button>
+                <button class="nav-link" id="master-mgmt-tab" onclick="switchTab('mgmt-tab')" style="display:none;">Controle de Perfis</button>
+                <button class="btn-logout" onclick="firebase.auth().signOut();">Sair</button>
+            </nav>
+        </header>
+
+        <main class="dashboard-content">
+            <div id="tab-timeline-tab" class="tab-content">
+                <div class="timeline-container">
+                    <div class="timeline-header-row" id="timeline-hours-header"></div>
+                    
+                    <div id="timeline-rows-container">
+                        </div>
+                </div>
+            </div>
+
+            <div id="tab-mgmt-tab" class="tab-content hidden">
+                <div class="mgmt-card">
+                    <h3>Gerenciamento de Acessos</h3>
+                    <p>Adicione novos perfis à Whitelist do sistema (Supervisor, Mesária ou Técnicos).</p>
+                    </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

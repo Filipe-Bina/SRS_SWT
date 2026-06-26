@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SRS_SWT - Técnico Mobile</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+<body class="mobile-body">
+
+    <div id="tecnico-dashboard" class="app-screen mobile-container">
+        <header class="mobile-header">
+            <div class="tec-info">
+                <h3 id="tec-name-display">Carregando...</h3>
+                <small>Operação de Campo</small>
+            </div>
+            <div class="route-control">
+                <span>Rota:</span>
+                <label class="switch">
+                    <input type="checkbox" id="technical-route-toggle" onchange="handleTechnicalRouteSwitch(this.checked)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </header>
+
+        <main class="mobile-main" id="tecnico-services-container">
+            <div class="tec-service-card active-route">
+                <div class="card-ticket-header">
+                    <h4>Ticket Sigtim: 6779214</h4>
+                    <span class="status-badge s-pendente">Pendente</span>
+                </div>
+
+                <div class="tec-actions-grid">
+                    <button class="btn-action" onclick="alert('Exibir Carimbo Sigtim')">📋 Dados do Serviço</button>
+                    <button class="btn-action btn-geo" onclick="/* Mudar status para Em Rota */">🚚 Dar Deslocamento</button>
+                    <button class="btn-action btn-start" onclick="/* Trigger câmera + Iniciar */">⚡ Iniciar Serviço</button>
+                    <button class="btn-action" onclick="/* Input de atualização instantânea */">💬 Enviar Atualização</button>
+                    <button class="btn-action btn-alert" onclick="/* Alerta popup/som no admin */">⚠️ Solicitar Teste</button>
+                    <button class="btn-action" onclick="/* Form Baixa + Fotos */">📥 Adicionar Baixa</button>
+                    <button class="btn-action btn-finish" id="btn-finalizar-ticket" disabled>🏁 Finalizar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

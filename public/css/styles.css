@@ -1,0 +1,211 @@
+/* ==========================================================================
+   RESET, DESIGN PRINCIPLES & TYPOGRAPHY
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+    color: #1a1816;
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   UNIFIED SECURITY / AUTH LAYOUTS
+   ========================================================================== */
+.unified-auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #306170 linear-gradient(135deg, #306170 0%, #1a333d 100%);
+}
+
+.auth-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.auth-box h2 {
+    color: #0572ce;
+    margin-bottom: 8px;
+}
+
+.auth-box p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 24px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #312d2a;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #a1a09f;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background-color: #6ba741;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover { background-color: #578a35; }
+.auth-footer { margin-top: 20px; text-align: center; }
+.auth-footer a { font-size: 14px; color: #0572ce; text-decoration: none; }
+
+/* ==========================================================================
+   ADMIN MAIN WEB CORE DASHBOARD
+   ========================================================================== */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #34302e;
+    color: #ffffff;
+    padding: 15px 30px;
+}
+
+.nav-link {
+    background: none;
+    border: none;
+    color: #a1a09f;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.nav-link.active {
+    color: #ffffff;
+    border-bottom: 3px solid #0572ce;
+}
+
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid #a1a09f;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   TIMELINE CONTÍNUA DE 24 HORAS VISUAL GRID
+   ========================================================================== */
+.timeline-container {
+    margin: 20px;
+    background: #ffffff;
+    border: 1px solid #a1a09f;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.timeline-header-row {
+    display: flex;
+    background-color: #312d2a;
+    color: #ffffff;
+}
+
+.timeline-label-col {
+    min-width: 220px;
+    max-width: 220px;
+    padding: 15px;
+    background-color: #252220;
+    flex-shrink: 0;
+}
+
+.timeline-hour-slot {
+    width: 100px;
+    text-align: center;
+    padding: 15px 0;
+    border-right: 1px solid #4a4440;
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+.timeline-row {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: center;
+}
+
+.timeline-drag-zone {
+    display: flex;
+    align-items: center;
+    width: calc(100px * 24);
+    height: 70px;
+    background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px);
+    background-size: 100px 100px;
+    position: relative;
+    padding: 0 5px;
+}
+
+/* ==========================================================================
+   MOBILE INTERFACE (TECNICO ECOSYSTEM)
+   ========================================================================== */
+.mobile-body { background-color: #f0f2f5; }
+.mobile-container { max-width: 480px; margin: 0 auto; min-height: 100vh; background: #ffffff; display: flex; flex-direction: column; }
+.mobile-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: #34302e; color: #ffffff; }
+
+.tec-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.btn-action {
+    padding: 15px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 1px solid #a1a09f;
+    background: #ffffff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-action:disabled { background-color: #f5f5f5 !important; color: #b5b5b5 !important; cursor: not-allowed; }
+.btn-geo { background-color: #e3f2fd; color: #0572ce; border-color: #0572ce; }
+.btn-start { background-color: #e8f5e9; color: #6ba741; border-color: #6ba741; }
+.btn-alert { background-color: #fff3e0; color: #ef6c00; border-color: #ef6c00; }
+.btn-finish { background-color: #6ba741; color: white; grid-column: span 2; }
+
+/* TOGGLE SWITCH ROTA SMARTPHONE */
+.switch { position: relative; display: inline-block; width: 46px; height: 24px; }
+.switch input { display:none; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; }
+input:checked + .slider { background-color: #0572ce; }
+input:checked + .slider:before { transform: translateX(22px); }
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
